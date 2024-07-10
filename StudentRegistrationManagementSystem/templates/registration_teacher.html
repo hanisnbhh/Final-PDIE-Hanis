@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Student</title>
+    <style>
+        /*TOP NAVIGATION*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(/static/blue.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        h1{
+            margin-left: 200px;
+            font-size: x-large;
+            color: #392678;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.546);
+            overflow: hidden;
+            display: flex; /* Use flexbox to align logo and navigation links */
+            justify-content: space-between; /* Distribute space between logo and links */
+            align-items: center; /* Center vertically within the navbar */
+            padding: 10px 10px; /* Add some padding for spacing */
+        }
+
+        .navbar .logo {
+            width: 150px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .nav-content {
+            text-align: right;
+        }
+
+        .nav-content a {
+            display: inline-block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-content a:hover {
+            color: #00b3ff;
+        }
+
+        /*TABLE*/
+        table {
+            margin: 0 auto;
+            width: 70%;
+            border-collapse: collapse;
+
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #392678;
+        }
+        th {
+            background-color: #8ebef2;
+            color: #392678;
+            text-align: center;
+        }
+        td {
+            background-color: white;
+            color: #392678;
+            text-align: left;
+
+        }
+
+        /*ADD ATTENDANCE*/
+        #add-btn {
+            background-color: #5672C4;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #add-btn:hover {
+            background-color: #416ceb;
+        }
+
+        /*SEARCH*/
+        #searchForm {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: -800px;  
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            margin: 0 auto;
+            color:#6B6B6B;
+            text-align:left;
+            }
+            
+        #searchForm label {
+            font-weight: bold;
+            }
+            
+        #searchForm input[type="text"],
+        #searchForm textarea,
+        #searchForm input[type="date"],
+        #searchForm input[type="submit"] {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            }
+            
+        #searchForm input[type="submit"] {
+            background-color: #5672C4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in;
+            border-radius: 20px;
+            width: 20%;
+            }
+            
+        #searchForm input[type="submit"]:hover {
+            background-color: #416ceb;
+            }       
+
+        /* BACK BUTTON SETTING */
+        #back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 50px;
+            background-color: #5672C4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            top: 50px;
+            left: 80px;
+        }
+
+        #back-btn:hover {
+            background-color: #416ceb;
+        }
+
+        #back-btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+            z-index: -1;
+        }
+
+        #back-btn:hover:before {
+            left: 0;
+        }
+
+        /*LINK */
+        .link {
+            text-decoration: underline;
+            cursor: pointer;
+            }
+
+        /* FOOTER */
+        .footer {
+            overflow: hidden;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.546);
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 3px 0;
+            }
+
+        .footer p {
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            padding: 3px 0;
+
+            }
+
+    </style>
+</head>
+<body>    
+    <div class="navbar">
+        <img src="/static/RegiSmart.png" class="logo">
+        <div class="nav-content">
+            <a href="{% url 'home_admin' %}">Home</a>
+            <a href="{% url 'registration_teacher' %}">Registration</a>
+            <a href="{% url 'profile_teacher' %}">Profile</a>
+            <a href="{% url 'login' %}">Log Out</a>
+        </div>
+    </div>
+
+<br><br>
+  <!--BACK BUTTON-->
+  <button id="back-btn" onclick="goBack()">BACK</button>
+
+    <!--CONTENT-->
+    <div id="content">
+        <div id="container">
+
+    <!-- SEARCH FORM -->
+    <form id="searchForm" action="{% url 'registration_teacher' %}" method="get">
+        <center><h2>Search</h2></center>
+        <label for="studID">Student ID:</label>
+        <input type="text" name="s_students" placeholder="Enter Student ID"> 
+        <center><input type="submit" value="SEARCH"></center>
+    </form>
+    
+
+<br><br><br>
+
+    <h1>List of Student Registration:</h1>
+    <br>
+    <table style="padding: left ;">
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Class ID</th>
+            <th>Student Email</th>
+            <th>Phone No</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Parents Name</th>
+            <th>Parents No</th>
+        </tr>
+        {% for data in student %}
+            <tr>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.studID}}
+                    </div>
+                </td>
+                <td>                    
+                    <div class="p">
+                    <p align="justify">
+                        {{data.studName}}
+                </div>
+                </td>
+                <td>                    
+                    <div class="p">
+                    <p align="justify">
+                        {{data.classID.classID}}
+                </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.studEmail}}
+                    </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.studNo}}
+                    </div>
+                </td>
+                <td>                    
+                    <div class="p">
+                    <p align="justify">
+                        {{data.dateOfBirth}}
+                </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.gender}}
+                    </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.address}}
+                    </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.parentsName}}
+                    </div>
+                </td>
+                <td>
+                    <div class="p">
+                    <p align="justify">
+                        {{data.parentsNo}}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <br><br>
+    <br>
+
+    <script type="text/javascript">
+        //BACK BUTTON
+        function goBack() {
+          window.history.back();
+        }
+       </script>
+       <br><br><br><br><br><br><br><br><br><br><br><br>
+
+   <div class="footer">
+       <p>2024 RegiSmart. All rights reserved.</p>
+   </div>
+</body>
+</html>

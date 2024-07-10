@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+
+    <!-- CSS Styles -->
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(/static/background.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.288);
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+        }
+
+        .navbar .logo {
+            width: 150px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .content {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .content h1 {
+            font-size: 50px;
+            margin-top: 80px;
+        }
+
+        .content p {
+            margin: 20px auto;
+            font-size: large;
+            line-height: 25px;
+        }
+
+        button {
+            width: 200px;
+            padding: 15px 0;
+            text-align: center;
+            margin: 20px 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #5672C4;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button1 {
+            width: 200px;
+            padding: 15px 0;
+            text-align: center;
+            margin: 20px 10px;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #5672C4;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button1 span {
+            background: #5672C4;
+            height: 100%;
+            width: 0;
+            border-radius: 25px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: 0.5s;
+        }
+
+        .button1:hover span {
+            width: 100%;
+        }
+
+        .button1:hover {
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: center;
+                padding: 5px 0;
+            }
+
+            .navbar ul {
+                margin-top: 10px;
+                text-align: center;
+            }
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .add-button {
+            display: inline-block;
+            width: 20%;
+            text-align: center;
+            background-color: #5672C4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .add-button:hover {
+            background-color: #416ceb;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.profile {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            border: 1px solid #888;
+            width: 30%;
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: black;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s;
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)}
+            to {-webkit-transform: scale(1)}
+        }
+
+        @keyframes animatezoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+        }
+
+        .footer {
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.288);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 7px 7px;
+            text-align: center;
+        }
+
+        .footer p {
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .switch-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .switch-button {
+            background-color: #5672C4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .switch-button.active {
+            background-color: #416ceb;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <img src="/static/RegiSmart.png" class="logo">
+        </div>
+
+        <div class="content">
+            <h1>Student Registration Management System</h1>
+            <br>
+            <p>Smart Registration for Bright Futures</p>
+            <br>
+            <div>
+                <button class="button1" type="button" onclick="openLoginModal()"><span></span>Get Started Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOG IN -->
+    <div id="id01" class="modal">
+        <form class="modal-content animate" method="post">
+            <div class="imgcontainer">
+                <h2>Log In</h2>
+                <br><br>
+                <span class="close" title="Close Modal" onclick="closeLoginModal()">&times;</span>
+                <img src="/static/profile.png" alt="Profile" class="profile">
+            </div>
+
+            <div class="container">
+                <div class="switch-buttons">
+                    <button type="button" class="switch-button active" onclick="switchLogin('Student')">Student</button>
+                    <button type="button" class="switch-button" onclick="switchLogin('Teacher')">Teacher</button>
+                    <button type="button" class="switch-button" onclick="switchLogin('Admin')">Admin</button>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error-message">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <label for="user_id" id="user-id-label" style="font-weight: bold;">Student ID:</label>
+                <input type="text" placeholder="Enter Student ID" name="user_id" id="user_id" required>
+                <input type="hidden" name="user_type" id="user_type" value="Student">
+                <br><br>
+                <label for="password" style="font-weight: bold;">Password:</label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                <br><br>                              
+                <center>
+                    <input type="submit" value="Login" class="add-button">
+                </center>
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>2024 RegiSmart. All rights reserved.</p>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script type="text/javascript">
+        function openLoginModal() {
+            var modal = document.getElementById("id01");
+            modal.style.display = "block";
+        }
+
+        function closeLoginModal() {
+            var modal = document.getElementById("id01");
+            modal.style.display = "none";
+        }
+
+        function switchLogin(userType) {
+            var userIdLabel = document.getElementById("user-id-label");
+            var userIdInput = document.getElementById("user_id");
+            var studentButton = document.querySelector(".switch-button:nth-child(1)");
+            var teacherButton = document.querySelector(".switch-button:nth-child(2)");
+            var adminButton = document.querySelector(".switch-button:nth-child(3)");
+            var userTypeInput = document.getElementById("user_type");
+
+            if (userType === 'Student') {
+                userIdLabel.textContent = 'Student ID:';
+                userIdInput.placeholder = 'Enter Student ID';
+                studentButton.classList.add("active");
+                teacherButton.classList.remove("active");
+                adminButton.classList.remove("active");
+                userTypeInput.value = 'Student';
+            } else if (userType === 'Teacher') {
+                userIdLabel.textContent = 'Teacher ID:';
+                userIdInput.placeholder = 'Enter Teacher ID';
+                studentButton.classList.remove("active");
+                teacherButton.classList.add("active");
+                adminButton.classList.remove("active");
+                userTypeInput.value = 'Teacher';
+            } else if (userType === 'Admin') {
+                userIdLabel.textContent = 'Admin ID:';
+                userIdInput.placeholder = 'Enter Admin ID';
+                studentButton.classList.remove("active");
+                teacherButton.classList.remove("active");
+                adminButton.classList.add("active");
+                userTypeInput.value = 'Admin';
+            }
+        }
+
+        // Default to student login
+        switchLogin('Student');
+    </script>
+</body>
+</html>

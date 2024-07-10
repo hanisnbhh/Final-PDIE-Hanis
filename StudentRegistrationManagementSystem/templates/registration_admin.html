@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>        
+        h1{
+            margin-left: 100px;
+            font-size: x-large;
+            color: #392678;
+        }
+
+        /*TOP NAVIGATION*/
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(/static/blue.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.546);
+            overflow: hidden;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 10px;
+        }
+
+        .navbar .logo {
+            width: 150px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .nav-content {
+            text-align: right;
+        }
+
+        .nav-content a {
+            display: inline-block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-content a:hover {
+            color: #00b3ff;
+        }
+
+        /*CONTENT*/
+        #content {
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-around; 
+            margin-top: 20px;
+            padding: 0 10%;
+        }
+
+        .flex-container a {
+            text-decoration: none;
+        }
+
+        .flex-box {
+            flex: 1 1 30%; 
+            margin: 0 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in;
+        }
+
+        .flex-box:hover {
+            transform: scale(1.05);
+        }
+
+        .flex-box h3 {
+            margin-top: 0;
+            color: #392678;
+        }
+
+        .flex-box img {
+            margin-bottom: 20px;
+            width: 120px; /* Reduced size */
+            height: 120px; /* Reduced size */
+        }
+
+        #container h2 {
+            margin: 0;
+            font-size: 2.0rem;
+            color: #392678;
+            text-align: left;
+        }
+
+        /*VIEW INTERVENTIONS*/
+        #add-btn {
+            background-color: #5672C4;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        #add-btn:hover {
+            background-color: #416ceb;
+        }
+
+        /* FOOTER */
+        .footer {
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.546);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 3px 0;
+        }
+
+        .footer p {
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            padding: 3px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="/static/RegiSmart.png" class="logo">
+        <div class="nav-content">
+            <a href="{% url 'home_admin' %}">Home</a>
+            <a href="{% url 'registration_admin' %}">Registration</a>
+            <a href="{% url 'profile_admin' %}">Profile</a>
+            <a href="{% url 'login' %}">Log Out</a>
+        </div>
+    </div>
+    <div id="content">
+        <div id="container">
+            <h1>Manage:</h1>
+            <br>
+            <div class="flex-container">
+                <a href="{% url 'manage_student' %}" class="flex-box">
+                    <div class="box-content">
+                        <img src="/static/student.png" alt="Student">
+                        <h3>Student</h3>
+                    </div>
+                </a>
+                <a href="{% url 'manage_teacher' %}" class="flex-box">
+                    <div class="box-content">
+                        <img src="/static/teacher.png" alt="Teacher">
+                        <h3>Teacher</h3>
+                    </div>
+                </a>
+                <a href="{% url 'manage_class' %}" class="flex-box">
+                    <div class="box-content">
+                        <img src="/static/class.png" alt="Class">
+                        <h3>Class</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="footer">
+        <p>2024 RegiSmart. All rights reserved.</p>
+    </div>
+</body>
+</html>

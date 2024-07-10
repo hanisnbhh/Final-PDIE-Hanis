@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        h1 {
+            margin-top: 20px;
+            font-size: x-large;
+            color: #392678;
+        }
+
+        /* TOP NAVIGATION */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(/static/blue.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.546);
+            overflow: hidden;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 10px;
+        }
+
+        .navbar .logo {
+            width: 150px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .nav-content {
+            text-align: right;
+        }
+
+        .nav-content a {
+            display: inline-block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-content a:hover {
+            color: #00b3ff;
+        }
+
+        /* CONTENT */
+        #content {
+            margin-top: 50px;
+            margin-left: 80px;
+            padding: 20px;
+            display: flex; 
+        }
+
+        #text {
+            flex: 1; 
+        }
+
+        #image {
+            flex: 1; 
+        }
+
+        #image img {
+            max-width: 100%; 
+        }
+
+        /* FOOTER */
+        .footer {
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.546);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 3px 0;
+        }
+
+        .footer p {
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            padding: 3px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <img src="/static/RegiSmart.png" class="logo">
+    <div class="nav-content">
+        <a href="{% url 'home_teacher' %}">Home</a>
+        <a href="{% url 'registration_teacher' %}">Registration</a>
+        <a href="{% url 'profile_teacher' %}">Profile</a>
+        <a href="{% url 'login' %}">Log Out</a>
+    </div>
+</div>
+
+<div id="content">
+    <div id="text">
+        <br><br><br><br>
+        <h1>Welcome back, {{ request.session.teacherName }} !</h1> 
+        <br>
+        <p style="font-family: Arial, Helvetica, sans-serif; color: #392678;">RegiSmart website offers a user-friendly platform for students, teachers, and administrators to efficiently manage student registrations. With intuitive tools, students can easily complete their registration process, while teachers gain access to comprehensive features for monitoring and managing these registrations. Administrators benefit from robust administrative tools for system maintenance and user management.</p>
+    </div>
+    <div id="image">
+        <img src="/static/home.png" alt="Image">
+    </div>
+</div>
+<br><br>
+<div class="footer">
+    <p>2024 RegiSmart. All rights reserved.</p>
+</div>
+</body>
+</html>
